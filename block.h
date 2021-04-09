@@ -11,13 +11,10 @@
 class block
 {
     public:
-        Block();
-        // Constructor for block transaction
+        ~block();
+        // Decstructor for block transaction-chain
 
-        ~BlockChain();
-        // Decstructor for block transaction
-
-        add(int amount, std::string sender, std::string receiver);
+        void add(int amount, std::string sender, std::string receiver);
         // Adds a transaction to the chain
         // View as a constructor
 
@@ -35,6 +32,7 @@ class block
         string nonce;      // random string used to simulate PoW
         string hash;       // hash of the previous block contents
 
+        void clear();      // will aid in the deletion of chain
 }
 
 #endif
