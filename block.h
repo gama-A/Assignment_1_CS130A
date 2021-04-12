@@ -11,6 +11,9 @@
 class block
 {
     public:
+        block();
+        // Default constructor
+
         ~block();
         // Decstructor for block transaction-chain
 
@@ -25,6 +28,8 @@ class block
         // Prints the entire contents of the chain
 
     private:
+        block *head;       // points to the head of the chain
+
         block *prev;       // points to previous block transaction
         int amount;        // stores the amount of money transferred
         string sender;     // name of sender of money

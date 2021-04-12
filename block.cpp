@@ -11,7 +11,7 @@
 using namespace std;
 
 block::block() {
-    // stub
+    this->head = NULL;
 }
 
 block::~block() {
@@ -19,7 +19,19 @@ block::~block() {
 }
 
 void block::add(int amount, string sender, string receiver) {
-    // stub
+    block *p = new block;
+    p->amount = amount;
+    p->sender = sender;
+    p->receiver = receiver;
+    string N = *p.findNonce(amount, sender, receiver);
+    p->nonce = N;
+    if(this->head == NULL) {
+        head = p;
+        p->prev = NULL;
+    }else {
+        p->prev = head->prev;
+        head = p;
+    }
 }
 
 int block::getBalance(string name) {
@@ -31,7 +43,7 @@ string block::printChain() {
 }
 
 void block::clear() {
-    block *p = head;
+    block *p = this;
     if(p->prev) {
         head = p->prev;
         delete p;

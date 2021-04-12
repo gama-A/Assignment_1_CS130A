@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 
-// #include CLASS_NAME.h
+#include "block.h"
 
 using namespace std;
 
@@ -22,20 +22,29 @@ void welcomePrompt() {
 
 int main() {
     bool status = true;
+    block t_Chain;
     while(status) {
         welcomePrompt();
         cin >> input;
         if(input == 1) {
-            // stub
+            cout << "Integer amount of money:\n";
+            cin >> a;
+            cout << "Sender name\n";
+            cin >> s;
+            cout << "Receiver name\n";
+            cin >> r;
+            t_Chain.add(a,s,r);
+            cout << endl;
         }else if(input == 2) {
-            // stub
+            cout << "Person Name\n";
+            cin >> name;
+            t_Chain.getBalance(name);
         }else if(input == 3) {
-            // stub
+            t_Chain.printChain();
         }else if(input == 4) {
             status = false;
         }else {
             cout << "wrong operation!\n";
-            // stub
         }
     }
     return 0;
