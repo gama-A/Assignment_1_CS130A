@@ -30,14 +30,20 @@ class block
     private:
         block *head;       // points to the head of the chain
 
-        block *prev;       // points to previous block transaction
-        int amount;        // stores the amount of money transferred
-        string sender;     // name of sender of money
-        string receiver;   // name of receiver of money
-        string nonce;      // random string used to simulate PoW
-        string hash;       // hash of the previous block contents
+        block *prev;            // points to previous block transaction
+        int amount;             // stores the amount of money transferred
+        std::string sender;     // name of sender of money
+        std::string receiver;   // name of receiver of money
+        std::string nonce;      // random string used to simulate PoW
+        std::string hash;       // hash of the previous block contents
 
-        void clear();      // will aid in the deletion of chain
+        void clear();      // helper function for destructor
+
+        string findNonce(int amount, std::string sender, std::string receiver);
+        // helper function for add
+
+        hash(const string str);
+        // SHA256 function
 }
 
 #endif
