@@ -24,7 +24,7 @@ class block
         int getBalance(std::string name);
         // Gets the balance of the given person 
 
-        std::string printChain();
+        void printChain();
         // Prints the entire contents of the chain
 
     private:
@@ -39,11 +39,14 @@ class block
 
         void clear();      // helper function for destructor
 
-        string findNonce(int amount, std::string sender, std::string receiver);
+        std::string findNonce(int amount, std::string sender, std::string receiver);
         // helper function for add
 
-        hash(const string str);
+        void printChainHelper(block *p);
+        // helper function for print
+
+        std::string hash256(const std::string str);
         // SHA256 function
-}
+};
 
 #endif

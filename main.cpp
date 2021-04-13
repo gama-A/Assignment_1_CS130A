@@ -23,6 +23,8 @@ void welcomePrompt() {
 int main() {
     bool status = true;
     block t_Chain;
+    int input, a;
+    string s, r, name;
     while(status) {
         welcomePrompt();
         cin >> input;
