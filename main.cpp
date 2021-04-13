@@ -23,7 +23,7 @@ void welcomePrompt() {
 int main() {
     bool status = true;
     block t_Chain;
-    int input, a;
+    int input, a, balance;
     string s, r, name;
     while(status) {
         welcomePrompt();
@@ -36,11 +36,11 @@ int main() {
             cout << "Receiver name\n";
             cin >> r;
             t_Chain.add(a,s,r);
-            cout << endl;
         }else if(input == 2) {
             cout << "Person Name\n";
             cin >> name;
-            t_Chain.getBalance(name);
+            balance = t_Chain.getBalance(name);
+            cout << balance << endl;
         }else if(input == 3) {
             t_Chain.printChain();
         }else if(input == 4) {

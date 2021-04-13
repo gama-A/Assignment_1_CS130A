@@ -44,26 +44,27 @@ block::~block() {
 }
 
 string block::findNonce(int amount, string sender, string receiver) {
-    bool notFound = true;
-    char x, check = '0';
-    string concatenation, h;
+    char x,y,z;
+    string nonce, h;
     stringstream ss;
     ss << amount;
     string a = ss.str();
-    while(notFound) {
+    bool nonceFound = false;
+    while(!nonceFound) {
+        nonce = "";
         x = char(rand() % 26 + 97);
-        string n(1,x);
-        concatenation = a + sender + receiver + n;
-        h = hash256(concatenation);
+        y = char(rand() % 26 + 97);
+        z = char(rand() % 26 + 97);
+        nonce += x;
+        nonce += y;
+        nonce += z;
+        h = hash256(a + sender + receiver + nonce);
         char back = h.back();
-        if(back == check) {
-            notFound = false;
+        if(back == '0') {
+            nonceFound = true;
         }
     }
-    stringstream cc;
-    cc << x;
-    string n = cc.str();
-    return n;
+    return nonce;
 }
 
 void block::add(int amount, string sender, string receiver) {
@@ -89,18 +90,17 @@ void block::add(int amount, string sender, string receiver) {
 }
 
 int block::getBalance(string name) {
-    int balance = 50, c = 0;
+    int balance = 50;
     block *p = this->head;
     while(p) {
         if(p->sender == name) {
-            c -= p->amount;
+            balance -= p->amount;
         }
         else if(p->receiver == name) {
-            c += p->amount;
+            balance += p->amount;
         }
         p = p->prev;
     }
-    balance += c;
     return balance;
 }
 
