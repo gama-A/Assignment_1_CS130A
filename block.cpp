@@ -78,7 +78,7 @@ string block::findNonce(int amount, string sender, string receiver) {
 
 void block::add(int amount, string sender, string receiver) {
     string N = findNonce(amount, sender, receiver);
-    block *p;
+    block *p = new block;
     p->amount = amount;
     p->sender = sender;
     p->receiver = receiver;
@@ -88,7 +88,7 @@ void block::add(int amount, string sender, string receiver) {
         p->prev = NULL;
         p->hash = "NULL";
     }else {
-        p->prev = *(this->head);
+        p->prev = this->head;
         this->head = p;
         stringstream ss;
         ss << p->prev->amount;
