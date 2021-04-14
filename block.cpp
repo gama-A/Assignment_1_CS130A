@@ -93,7 +93,7 @@ void block::add(int amount, string sender, string receiver) {
         stringstream ss;
         ss << p->prev->amount;
         string a = ss.str();
-        p->hash = hash256(a + p->prev->sender + p->prev->receiver + p->prev->nonce + p->prev->hash);
+        p->hash = hash256(a + p->prev->sender + p->prev->receiver + p->prev->hash + p->prev->nonce);
     }
 }
 
