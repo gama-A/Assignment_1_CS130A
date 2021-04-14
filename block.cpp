@@ -40,7 +40,16 @@ block::block() {
 }
 
 block::~block() {
-    this->clear();
+    deleteChain(head);
+}
+
+void block::deleteChain(block *p) {
+    if(!p) {
+        return;
+    }else {
+        deleteChain(p->prev);
+        delete p;
+    }
 }
 
 string block::findNonce(int amount, string sender, string receiver) {
@@ -68,24 +77,23 @@ string block::findNonce(int amount, string sender, string receiver) {
 }
 
 void block::add(int amount, string sender, string receiver) {
-    block *p = new block;
+    string N = findNonce(amount, sender, receiver);
+    block *p;
     p->amount = amount;
     p->sender = sender;
     p->receiver = receiver;
-    string N = findNonce(amount, sender, receiver);
     p->nonce = N;
     if(this->head == NULL) {
         head = p;
         p->prev = NULL;
         p->hash = "NULL";
     }else {
-        p->prev = head->prev;
-        head = p;
-        block *q = p->prev;
+        p->prev = *(this->head);
+        this->head = p;
         stringstream ss;
-        ss << q->amount;
+        ss << p->prev->amount;
         string a = ss.str();
-        p->hash = hash256(a + q->sender + q->receiver + q->nonce + q->hash);
+        p->hash = hash256(a + p->prev->sender + p->prev->receiver + p->prev->nonce + p->prev->hash);
     }
 }
 
@@ -116,13 +124,4 @@ void block::printChainHelper(block* p) {
     cout << "Amount: " << p->amount << endl;
     cout << "Sender: " << p->sender << endl << "Receiver: " << p->receiver << endl;
     cout << "Nonce: " << p->nonce << endl << "Hash: " << p->hash << endl;
-}
-
-void block::clear() {
-    block *p = this->head;
-    if(p->prev) {
-        head = p->prev;
-        delete p;
-        p = head;
-    }
 }

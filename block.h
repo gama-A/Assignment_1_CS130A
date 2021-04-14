@@ -13,6 +13,9 @@ class block
     public:
         block();
         // Default constructor
+        
+        block(int amount, std::string sender, std::string receiver, std::string nonce);
+        // Value constructor
 
         ~block();
         // Decstructor for block transaction-chain
@@ -37,7 +40,7 @@ class block
         std::string nonce;      // random string used to simulate PoW
         std::string hash;       // hash of the previous block contents
 
-        void clear();      // helper function for destructor
+        void deleteChain(block *p);
 
         std::string findNonce(int amount, std::string sender, std::string receiver);
         // helper function for add
